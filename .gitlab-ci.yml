@@ -1,0 +1,32 @@
+stages:
+  - install
+  - build
+  - test
+
+cache:
+  paths:
+    - node_modules/
+
+install:
+  stage: install
+  script:
+    - npm ci
+
+build:
+  stage: build
+  script:
+    - npm run build
+
+test:
+  stage: test
+  script:
+    - npm run lint
+    - npm run test
+
+workflow:
+  rules:
+    # Run on merge requests
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+    # Run when code is pushed to master
+    - if: $CI_COMMIT_BRANCH == "master"
