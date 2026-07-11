@@ -385,7 +385,6 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   AuthSecurity: 'AuthSecurity',
-  PasswordHistory: 'PasswordHistory',
   RefreshToken: 'RefreshToken',
   Session: 'Session',
   User: 'User',
@@ -405,7 +404,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "authSecurity" | "passwordHistory" | "refreshToken" | "session" | "user" | "verificationToken"
+    modelProps: "authSecurity" | "refreshToken" | "session" | "user" | "verificationToken"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -480,80 +479,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.AuthSecurityCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.AuthSecurityCountAggregateOutputType> | number
-        }
-      }
-    }
-    PasswordHistory: {
-      payload: Prisma.$PasswordHistoryPayload<ExtArgs>
-      fields: Prisma.PasswordHistoryFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.PasswordHistoryFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordHistoryPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.PasswordHistoryFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordHistoryPayload>
-        }
-        findFirst: {
-          args: Prisma.PasswordHistoryFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordHistoryPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.PasswordHistoryFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordHistoryPayload>
-        }
-        findMany: {
-          args: Prisma.PasswordHistoryFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordHistoryPayload>[]
-        }
-        create: {
-          args: Prisma.PasswordHistoryCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordHistoryPayload>
-        }
-        createMany: {
-          args: Prisma.PasswordHistoryCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.PasswordHistoryCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordHistoryPayload>[]
-        }
-        delete: {
-          args: Prisma.PasswordHistoryDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordHistoryPayload>
-        }
-        update: {
-          args: Prisma.PasswordHistoryUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordHistoryPayload>
-        }
-        deleteMany: {
-          args: Prisma.PasswordHistoryDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.PasswordHistoryUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.PasswordHistoryUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordHistoryPayload>[]
-        }
-        upsert: {
-          args: Prisma.PasswordHistoryUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordHistoryPayload>
-        }
-        aggregate: {
-          args: Prisma.PasswordHistoryAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregatePasswordHistory>
-        }
-        groupBy: {
-          args: Prisma.PasswordHistoryGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.PasswordHistoryGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.PasswordHistoryCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.PasswordHistoryCountAggregateOutputType> | number
         }
       }
     }
@@ -907,16 +832,6 @@ export const AuthSecurityScalarFieldEnum = {
 export type AuthSecurityScalarFieldEnum = (typeof AuthSecurityScalarFieldEnum)[keyof typeof AuthSecurityScalarFieldEnum]
 
 
-export const PasswordHistoryScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  passwordHash: 'passwordHash',
-  createdAt: 'createdAt'
-} as const
-
-export type PasswordHistoryScalarFieldEnum = (typeof PasswordHistoryScalarFieldEnum)[keyof typeof PasswordHistoryScalarFieldEnum]
-
-
 export const RefreshTokenScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -1215,7 +1130,6 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   authSecurity?: Prisma.AuthSecurityOmit
-  passwordHistory?: Prisma.PasswordHistoryOmit
   refreshToken?: Prisma.RefreshTokenOmit
   session?: Prisma.SessionOmit
   user?: Prisma.UserOmit

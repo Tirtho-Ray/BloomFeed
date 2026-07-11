@@ -44,26 +44,6 @@ export class AuthService {
       30,
     );
   }
-  private async generateUniqueProfileName(tx: any, baseName: string): Promise<string> {
-    let profileName = (baseName || 'user').toLowerCase().replace(/\s+/g, '');
-    let counter = 1;
-    let currentName = profileName;
-
-    while (true) {
-      const existing = await tx.studentProfile.findUnique({
-        where: { profileName: currentName },
-      });
-
-      if (!existing) {
-        return currentName;
-      }
-
-      currentName = `${profileName}${counter}`;
-      counter++;
-    }
-  }
-
-
 
   async signup(dto: RegisterDto, ip: string, ua: string): Promise<{ userId: string }> {
     const email = dto.email.toLowerCase();
@@ -449,13 +429,6 @@ export class AuthService {
         tx,
         tokens.family,
       );
-
-      void this.authQueue.addLoginHistoryJob({
-        userId: user.id,
-        ipAddress: ip,
-        device: dto.deviceId,
-        loginMethod: 'password',
-      });
 
       void this.authQueue.addAuditLogJob({
         userId: user.id,

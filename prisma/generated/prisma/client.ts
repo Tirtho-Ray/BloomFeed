@@ -45,11 +45,6 @@ export { Prisma }
  */
 export type AuthSecurity = Prisma.AuthSecurityModel
 /**
- * Model PasswordHistory
- * 
- */
-export type PasswordHistory = Prisma.PasswordHistoryModel
-/**
  * Model RefreshToken
  * 
  */
