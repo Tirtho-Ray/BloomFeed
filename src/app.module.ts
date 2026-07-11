@@ -11,6 +11,7 @@ import { BullModule } from '@nestjs/bullmq';
 import { ConfigService } from '@nestjs/config';
 import { AuthModule } from './modules/auth/auth.module';
 import { QueuesModule } from './common/queues/queues.module';
+import { LoggerModule } from './common/logger/logger.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { QueuesModule } from './common/queues/queues.module';
     ConfigurationModule,
     PrismaModule,
     RedisModule,
+    LoggerModule,
     AuthModule,
     QueuesModule,
   ],
