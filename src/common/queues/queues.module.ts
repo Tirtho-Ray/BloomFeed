@@ -1,28 +1,30 @@
 import { Global, Module } from '@nestjs/common';
 import { BullModule } from '@nestjs/bullmq';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { QueueNames } from './queues.constants';
+import { AuthQueueProducer } from './producers/auth-queue.producer';
+import { EmailQueueProducer } from './producers/email-queue.producer';
+import { AuthQueueProcessor } from './processors/auth-queue.processor';
+import { EmailQueueProcessor } from './processors/email-queue.processor';
+import { MailModule } from '../mail/mail.module';
 
 @Global()
 @Module({
   imports: [
-    BullModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-        connection: {
-          host: configService.get('redis.host', 'localhost'),
-          port: configService.get('redis.port', 6379),
-        },
-      }),
-      inject: [ConfigService],
-    }),
     BullModule.registerQueue(
-
+      { name: QueueNames.AUTH },
+      { name: QueueNames.EMAIL },
     ),
+    MailModule,
   ],
   providers: [
+    AuthQueueProducer,
+    EmailQueueProducer,
+    AuthQueueProcessor,
+    EmailQueueProcessor,
   ],
   exports: [
-
+    AuthQueueProducer,
+    EmailQueueProducer,
   ],
 })
 export class QueuesModule { }

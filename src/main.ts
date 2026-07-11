@@ -3,7 +3,6 @@ import { ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import cookieParser from 'cookie-parser';
 import { ValidationPipe } from '@nestjs/common';
-import { RedisIoAdapter } from './common/redis/redis-io.adapter';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -15,10 +14,6 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
   const port = configService.get<number>('PORT') || 9097;
 
-  // Set up Redis adapter for horizontal scaling (WebSockets)
-  const redisIoAdapter = new RedisIoAdapter(app);
-  await redisIoAdapter.connectToRedis();
-  app.useWebSocketAdapter(redisIoAdapter);
 
   const originString = process.env.ALLOWED_ORIGINS || '';
   const allowedOrigins = originString

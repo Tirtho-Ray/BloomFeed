@@ -9,7 +9,8 @@ import { RedisModule } from './common/redis/redis.module';
 import { FileModule } from './lib/file/file.module';
 import { BullModule } from '@nestjs/bullmq';
 import { ConfigService } from '@nestjs/config';
-
+import { AuthModule } from './modules/auth/auth.module';
+import { QueuesModule } from './common/queues/queues.module';
 
 @Module({
   imports: [
@@ -27,6 +28,8 @@ import { ConfigService } from '@nestjs/config';
     ConfigurationModule,
     PrismaModule,
     RedisModule,
+    AuthModule,
+    QueuesModule,
   ],
   controllers: [AppController],
   providers: [AppService, AtStrategy],

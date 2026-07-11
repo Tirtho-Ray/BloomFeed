@@ -1,12 +1,19 @@
 model User {
-    id            String    @id @default(cuid())
+    id            String         @id @default(cuid())
     name          String?
-    email         String    @unique
-    password      String
+    email         String         @unique
+    password      String?
     emailVerified DateTime?
-    role          UserRole
-    createdAt     DateTime  @default(now())
-    updatedAt     DateTime  @updatedAt
+    status        UserStatus     @default(PENDING)
+    role          UserRole       @default(USER)
+    tokenVersion  Int            @default(0)
+    createdAt     DateTime       @default(now())
+    updatedAt     DateTime       @updatedAt
+
+    refreshToken     RefreshToken[]
+    sessions         Session[]
+    authSecurity     AuthSecurity?
+    verificationToken VerificationToken[]
 }
 
 enum UserRole {
@@ -14,4 +21,11 @@ enum UserRole {
     SUPPORTER
     ADMIN
     SUPER_ADMIN
+}
+
+enum UserStatus {
+    PENDING
+    ACTIVE
+    SUSPENDED
+    DELETED
 }
