@@ -11,10 +11,9 @@ import { GetUser } from '../../../core/jwt/get-user.decorator';
 @ApiTags('Posts')
 @Controller('posts')
 export class PostController {
-  constructor(private readonly postService: PostService) {}
+  constructor(private readonly postService: PostService) { }
 
   @ApiOperation({ summary: 'Create a new post' })
-  @ApiBearerAuth()
   @ApiResponse({ status: 201, description: 'Post successfully created' })
   @ApiResponse({ status: 429, description: 'Rate limit exceeded' })
   @UseGuards(AtGuard, CreatePostRateLimitGuard)
@@ -77,5 +76,20 @@ export class PostController {
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
   ) {
     return this.postService.getRecentFeed(page, limit);
+  }
+
+  @ApiOperation({ summary: 'Get my posts', description: 'Returns the authenticated user\'s posts in reverse chronological order.' })
+  @ApiResponse({ status: 200, description: 'Successfully retrieved your posts' })
+  @ApiBearerAuth()
+  @ApiQuery({ name: 'page', required: false, type: Number, description: 'Page number (default: 1)' })
+  @ApiQuery({ name: 'limit', required: false, type: Number, description: 'Items per page (default: 10)' })
+  @UseGuards(AtGuard)
+  @Get('me')
+  async getMyPosts(
+    @GetUser('id') userId: string,
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
+  ) {
+    return this.postService.getMyPosts(userId, page, limit);
   }
 }

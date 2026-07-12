@@ -63,9 +63,10 @@ model Comment {
 
     likes CommentLike[]
 
-    @@index([postId, parentId, deletedAt, createdAt(asc)])
-    @@index([rootId, deletedAt, createdAt(asc)])
-    @@index([parentId, deletedAt, createdAt(asc)])
+    @@index([postId, parentId, deletedAt, id(desc)])
+    @@index([rootId, deletedAt, id(desc)])
+    @@index([parentId, deletedAt, id(desc)])
+    @@index([userId, deletedAt, id(desc)])
 }
 
 model CommentLike {

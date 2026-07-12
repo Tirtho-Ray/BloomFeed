@@ -233,6 +233,23 @@ export class PostService {
     return cachedPosts.filter(Boolean);
   }
 
+
+  /**
+   * Retrieves the authenticated user's posts in reverse chronological order.
+   */
+  async getMyPosts(userId: string, page: number, limit: number) {
+    const skip = (page - 1) * limit;
+
+    const posts = await this.prisma.post.findMany({
+      where: { userId, deletedAt: null },
+      orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
+      skip,
+      take: limit,
+    });
+
+    return posts.map((post) => this.serializePost(post));
+  }
+
   /**
    * Updates caption and/or imageUrl of a post, synchronizes caches.
    */
