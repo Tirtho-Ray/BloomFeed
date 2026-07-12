@@ -50,6 +50,18 @@ export default () => ({
     url: process.env.REDIS_URL,
   },
 
+  mail: {
+    MAIL_DRIVER: process.env.MAIL_DRIVER || 'nodemailer',
+    MAIL_HOST: process.env.MAIL_HOST,
+    MAIL_PORT: parseInt(process.env.MAIL_PORT || '587', 10),
+    MAIL_USER: process.env.MAIL_USER,
+    MAIL_PASS: process.env.MAIL_PASS,
+    MAIL_FROM: process.env.MAIL_FROM,
+    AWS_REGION: process.env.AWS_REGION || 'us-east-1',
+    AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
+    AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
+  },
+
   frontend: {
     url: process.env.FRONTEND_URL || 'http://localhost:5173',
   },

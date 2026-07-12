@@ -26,7 +26,7 @@ export class EmailQueueProcessor extends WorkerHost {
       to: email,
       subject,
       template,
-      context: { otp },
+      context: { otp, type: type.toLowerCase() },
     });
   }
 }

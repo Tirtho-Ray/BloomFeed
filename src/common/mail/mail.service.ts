@@ -6,7 +6,7 @@ import * as path from 'path';
 @Injectable()
 export class MailService {
     private readonly logger = new Logger(MailService.name);
-    private readonly templateDir = path.join(process.cwd(), 'src/common/mail/templates');
+    private readonly templateDir = path.resolve(__dirname, 'templates');
 
     constructor(
         @Inject('MAIL_PROVIDER') private readonly provider: IMailProvider,
