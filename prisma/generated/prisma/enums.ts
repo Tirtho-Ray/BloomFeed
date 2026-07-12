@@ -9,6 +9,14 @@
 * 🟢 You can import this file directly.
 */
 
+export const PostVisibility = {
+  PUBLIC: 'PUBLIC',
+  PRIVATE: 'PRIVATE'
+} as const
+
+export type PostVisibility = (typeof PostVisibility)[keyof typeof PostVisibility]
+
+
 export const UserRole = {
   USER: 'USER',
   SUPPORTER: 'SUPPORTER',

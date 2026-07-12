@@ -9,6 +9,10 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/AuthSecurity.js'
+export type * from './models/Post.js'
+export type * from './models/PostLike.js'
+export type * from './models/Comment.js'
+export type * from './models/CommentLike.js'
 export type * from './models/RefreshToken.js'
 export type * from './models/Session.js'
 export type * from './models/User.js'

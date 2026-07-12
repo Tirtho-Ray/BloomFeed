@@ -1,6 +1,7 @@
 export enum QueueNames {
   AUTH = 'auth_queue',
   EMAIL = 'email_queue',
+  POST = 'post_queue',
 }
 
 export enum AuditSeverity {

@@ -45,6 +45,26 @@ export { Prisma }
  */
 export type AuthSecurity = Prisma.AuthSecurityModel
 /**
+ * Model Post
+ * 
+ */
+export type Post = Prisma.PostModel
+/**
+ * Model PostLike
+ * 
+ */
+export type PostLike = Prisma.PostLikeModel
+/**
+ * Model Comment
+ * 
+ */
+export type Comment = Prisma.CommentModel
+/**
+ * Model CommentLike
+ * 
+ */
+export type CommentLike = Prisma.CommentLikeModel
+/**
  * Model RefreshToken
  * 
  */

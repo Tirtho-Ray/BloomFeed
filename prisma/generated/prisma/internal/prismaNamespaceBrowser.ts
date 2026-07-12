@@ -52,6 +52,10 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   AuthSecurity: 'AuthSecurity',
+  Post: 'Post',
+  PostLike: 'PostLike',
+  Comment: 'Comment',
+  CommentLike: 'CommentLike',
   RefreshToken: 'RefreshToken',
   Session: 'Session',
   User: 'User',
@@ -87,6 +91,59 @@ export const AuthSecurityScalarFieldEnum = {
 } as const
 
 export type AuthSecurityScalarFieldEnum = (typeof AuthSecurityScalarFieldEnum)[keyof typeof AuthSecurityScalarFieldEnum]
+
+
+export const PostScalarFieldEnum = {
+  id: 'id',
+  publicId: 'publicId',
+  userId: 'userId',
+  imageUrl: 'imageUrl',
+  caption: 'caption',
+  visibility: 'visibility',
+  likeCount: 'likeCount',
+  commentCount: 'commentCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
+
+
+export const PostLikeScalarFieldEnum = {
+  postId: 'postId',
+  userId: 'userId',
+  createdAt: 'createdAt'
+} as const
+
+export type PostLikeScalarFieldEnum = (typeof PostLikeScalarFieldEnum)[keyof typeof PostLikeScalarFieldEnum]
+
+
+export const CommentScalarFieldEnum = {
+  id: 'id',
+  publicId: 'publicId',
+  postId: 'postId',
+  userId: 'userId',
+  parentId: 'parentId',
+  rootId: 'rootId',
+  content: 'content',
+  likeCount: 'likeCount',
+  replyCount: 'replyCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
+
+
+export const CommentLikeScalarFieldEnum = {
+  commentId: 'commentId',
+  userId: 'userId',
+  createdAt: 'createdAt'
+} as const
+
+export type CommentLikeScalarFieldEnum = (typeof CommentLikeScalarFieldEnum)[keyof typeof CommentLikeScalarFieldEnum]
 
 
 export const RefreshTokenScalarFieldEnum = {
@@ -129,6 +186,7 @@ export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeo
 
 export const UserScalarFieldEnum = {
   id: 'id',
+  publicId: 'publicId',
   name: 'name',
   email: 'email',
   password: 'password',
