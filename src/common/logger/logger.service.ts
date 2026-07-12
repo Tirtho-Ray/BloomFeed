@@ -9,12 +9,8 @@ export class CustomLoggerService implements LoggerService {
 
   constructor(private readonly configService: ConfigService) {
     const nodeEnv = this.configService.get<string>('node_env', 'development');
-    let lokiUrl = this.configService.get<string>('loki.LOKI_URL', 'http://localhost:3100');
-
-    // Senior dev tip: If running locally but config says 'loki', redirect to localhost
-    if (lokiUrl.includes('://loki:') && !process.env.DOCKER_CONTAINER) {
-      lokiUrl = lokiUrl.replace('://loki:', '://localhost:');
-    }
+    const lokiEnabled = this.configService.get<boolean>('loki.enabled', false);
+    const lokiUrl = this.configService.get<string>('loki.url');
 
     const transports: winston.transport[] = [
       new winston.transports.Console({
@@ -29,7 +25,7 @@ export class CustomLoggerService implements LoggerService {
       }),
     ];
 
-    if (nodeEnv !== 'test') {
+    if (nodeEnv !== 'test' && lokiEnabled && lokiUrl) {
       const lokiTransport = new LokiTransport({
         host: lokiUrl,
         labels: { app: 'Eduhub-api', env: nodeEnv },
@@ -47,8 +43,7 @@ export class CustomLoggerService implements LoggerService {
       transports,
     });
 
-    // Send a test log immediately to verify connection
-    this.logger.info('Logger initialized and connected to Loki', { context: 'Bootstrap' });
+    this.logger.info('Logger initialized', { context: 'Bootstrap' });
   }
 
   log(message: any, context?: string) {

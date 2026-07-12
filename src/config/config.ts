@@ -50,6 +50,11 @@ export default () => ({
     url: process.env.REDIS_URL,
   },
 
+  loki: {
+    enabled: process.env.LOKI_ENABLED === 'true',
+    url: process.env.LOKI_URL,
+  },
+
   mail: {
     MAIL_DRIVER: process.env.MAIL_DRIVER || 'nodemailer',
     MAIL_HOST: process.env.MAIL_HOST,
